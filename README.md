@@ -8,6 +8,8 @@ La LAN1 (enp0s8) ospita client Linux — Fedora (10.0.10.101) e Ubuntu (10.0.10.
 
 [![Infrastruttura di Rete](https://img.shields.io/badge/01--prova-red?style=for-the-badge)](./zaino/prova)
 
-2. [prova2](/zaino/apparmor.txt)
-3. 
+| Sezione | Collegamento Rapido | Stato |
+| :---: | :--- | :---: |
+| 1️⃣ | [01-Networking_Gateway](./01-Networking_Gateway) | `Completato` |
+| 2️⃣ | [02-Windows_AD_DNS](./02-Windows_AD_DNS) | `In Corso` |
 
