@@ -1,1 +1,44 @@
 
+[Global]
+template shell = /bin/bash
+workgroup = LAB
+security = ADS
+realm = LAB.LOCAL
+printing = cups
+printcap name = cups
+load printers = yes
+winbind use default domain = yes
+winbind enum users = yes
+winbind enum groups = yes
+winbind expand groups = 4
+idmap config * : backend = tdb
+idmap config * : range = 3000-79999
+
+[Printers]
+comment = All Printers
+path = /var/spool/samba
+browseable = yes
+printable = yes
+guest ok = yes
+read only = yes
+
+
+[Print$]
+path= /var/lib/samba/printers
+browseable = yes
+read only = yes
+
+[ProgettiDev]
+path = /srv/samba/progetti_dev
+valid users = @"LAB\G_Sviluppatori"
+read only = no
+guest ok = no
+
+[dev_share]
+path = /srv/samba/dev
+read only = no
+browseable = yes
+valid users = @smb_dev_share
+force groups = smb_dev_share
+create mask = 0660
+directory mask = 2770
