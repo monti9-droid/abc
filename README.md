@@ -8,5 +8,5 @@ La LAN1 (enp0s8) ospita client Linux — Fedora (10.0.10.101) e Ubuntu (10.0.10.
 
 [![Infrastruttura di Rete](https://img.shields.io/badge/01--prova-red?style=for-the-badge)](./zaino/prova)
 
-<kbd>[01-Networking_Gateway](./01-Networking_Gateway)</kbd> — Configurazione del router Debian 13 e server KEA.
+<kbd>[01-Networking_Gateway](./zaino/prova)</kbd> — Configurazione del router Debian 13 e server KEA.
 
