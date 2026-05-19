@@ -1,0 +1,40 @@
+
+Il Gateway Debian 13 agisce come Stateful Firewall per l'intera infrastruttura del laboratorio. La logica di sicurezza applicata segue il principio del **Minimo Privilegio**: tutto ciò che non è esplicitamente permesso viene bloccato alla radice.
+
+Lo script completo è disponibile in questa cartella come `iptables-router.sh`.
+
+Punti Chiave dell'Architettura del Firewall
+
+#### 1. Approccio Stateful (Connection Tracking)
+Per ottimizzare le prestazioni e garantire la sicurezza, il firewall analizza lo stato delle connessioni grazie al modulo `conntrack`:
+
+iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+Spiegazione: Questo permette di accettare automaticamente i pacchetti di ritorno per le connessioni già stabilite (es. una risposta web a una richiesta partita da una delle LAN), senza dover aprire porte in ingresso.
+2. Network Address Translation (NAT) & Forwarding
+
+Il mascheramento dell'interfaccia WAN permette ai client interni di navigare su Internet utilizzando l'IP del Gateway:
+
+
+iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
+
+Il routing tra le interfacce è completato dall'abilitazione dell'IP Forwarding a livello di Kernel Linux: echo 1 > /proc/sys/net/ipv4/ip_forward.
+3. Segmentazione delle Zone (LAN & VPN)
+
+Le regole di FORWARD applicate isolano e collegano le reti in modo mirato:
+
+  Inter-LAN Routing: È consentita la comunicazione bidirezionale tra la rete Linux (enp0s8) e la rete Windows (enp0s9) per permettere l'integrazione dei sistemi con Active Directory.
+
+  Accesso VPN (WireGuard): L'interfaccia wg0 è configurata per instradare il traffico di gestione sia verso Internet che verso entrambe le LAN interne, consentendo l'amministrazione remota sicura sulla porta UDP 51820.
+
+4. Hardening delle Policy di Default
+
+A riprova di una configurazione sicura, le catene di INPUT e FORWARD hanno come politica nativa il DROP:
+Bash
+
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+
+In questo modo, qualsiasi pacchetto non autorizzato dalle regole precedenti viene scartato silenziosamente.
+
