@@ -4,4 +4,5 @@ il cui nodo centrale è una macchina virtuale Debian 13 "Trixie" (Oracle VM), co
 Il progetto nasce in ambito formativo ma rappresenta un'implementazione reale e funzionante di una rete strutturata.
 Il server Debian è dotato di tre interfacce (bridge + 2 LAN) e gestisce routing, NAT e assegnazione DHCP tramite server KEA.
 La LAN1 (enp0s8) ospita client Linux — Fedora (10.0.10.101) e Ubuntu (10.0.10.102) — mentre la LAN2 (enp0s9)...
-[testo del link](ARP_SPOOFING.TXT)
+
+[prova](/comandi_win.txt)
