@@ -8,4 +8,5 @@ La LAN1 (enp0s8) ospita client Linux — Fedora (10.0.10.101) e Ubuntu (10.0.10.
 
 
 
-<a href="/comandi:win.txt" style="text-decoration: none;">comandi windows</a>
+[cliccami](./comandi_win)
+
