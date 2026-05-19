@@ -7,5 +7,6 @@ La LAN1 (enp0s8) ospita client Linux — Fedora (10.0.10.101) e Ubuntu (10.0.10.
 
 
 [prova](/comandi_win.txt)
+
 [prova2](/zaino/apparmor.txt)
 
