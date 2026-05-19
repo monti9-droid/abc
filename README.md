@@ -1,4 +1,4 @@
-<div style="text-align: justify; text-justify: inter-word;">
+
   
 Mi presento: sono Alessandro, ho recentemente completato un corso di 300 ore presso il CEFI, focalizzato sulla gestione dei sistemi e sulla sicurezza informatica.
 
@@ -18,7 +18,6 @@ Grafana, Prometheus, Loki, Promtail e cAdvisor, containerizzati in Docker, monit
 
 Rsync e Cron gestiscono ,in modo incrementale il backup automatizzato tramite script.
 
-</div>
 
 
 
