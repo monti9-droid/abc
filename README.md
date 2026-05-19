@@ -18,14 +18,20 @@ Grafana, Prometheus, Loki, Promtail e cAdvisor, containerizzati in Docker, monit
 
 Rsync e Cron gestiscono ,in modo incrementale il backup automatizzato tramite script.
 
-
 Interfaces
+
 Routing e Nat
+
 DHCP
+
 Windows Server AD DNS
+
 Samba Winbind CUPS
+
 Docker Prometheus Grafana Promtail Loki
+
 Mainteinance
+
 
 
 
