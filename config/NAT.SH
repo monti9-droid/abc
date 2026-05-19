@@ -1,15 +1,7 @@
-
 #!/bin/sh
 
-# ───────────────────────────────────────────
-# INTERFACCE
-# enp0s3 = WAN (internet/bridge)
-# enp0s8 = LAN Linux (Fedora, Ubuntu)
-# enp0s9 = LAN Windows (AD, DNS)
-# wg0    = VPN WireGuard
-# ───────────────────────────────────────────
 
-# Flush regole esistenti
+
 iptables -F
 iptables -t nat -F
 
