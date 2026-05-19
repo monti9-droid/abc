@@ -6,7 +6,7 @@ Il server Debian è dotato di tre interfacce (bridge + 2 LAN) e gestisce routing
 La LAN1 (enp0s8) ospita client Linux — Fedora (10.0.10.101) e Ubuntu (10.0.10.102) — mentre la LAN2 (enp0s9)...
 
 
-*<kbd>01</kbd> [prova](/comandi_win.txt)
+[![Infrastruttura di Rete](https://img.shields.io/badge/01--Networking__Gateway-blue?style=for-the-badge)](./zaino/prova)
 
 2. [prova2](/zaino/apparmor.txt)
 3. 
