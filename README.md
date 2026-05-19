@@ -1,13 +1,7 @@
-Prima di procedere mi presento , mi chiamo Alessandro , e ho da poco terminato un corso di 300 ore presso il CEFI, porta furba, inerente
-la gestione dei sistemi e la sicurezza informatica.
-
-Ho creato questo file con l'intento di documentare ed eventualmente condividere la mia esperienza nella creazione di una rete stratificata avente come
-server virtuale (oracle vm) una macchina Debian 13.14, con funzione di routing/NAT tramite script basato su comandi Iptables e ipv4 Forwarding.
-
-La funzione del progetto presente è puramente didattica e ha il principale scopo nell'apprendimento e nell'approfontimento della conoscenza delle regole e 
-delle procedure che determinano il funzionamento di una rete strutturata come quella che sto per elencare nelle sue caratteristiche .
-
-Come dicevo , il primo mattone è rappresentato da un server Debian 13.14 dotato di 3 interfacce (bridge e 2 LAN) che , oltre a gestire, NAT e Routing
-assegna il DHCP a tutte le macchine della rete tramite server KEA. 
-La prima delle 2 lan (LAN1: enp0s8) è dedicata a client Linux, nello specifico Fedora (10.0.10.101) e Ubuntu (10.0.10.102)
-La seconda invece (LAN2: enp0s9) mette in contatto 
+Mi presento: sono Alessandro, ho recentemente completato un corso di 300 ore presso il CEFI, focalizzato sulla gestione dei sistemi e sulla sicurezza informatica.
+Questo repository nasce con l'obiettivo di documentare il processo di progettazione e implementazione di una rete stratificata, 
+il cui nodo centrale è una macchina virtuale Debian 13 "Trixie" (Oracle VM), configurata con funzioni di routing e NAT tramite iptables e IP forwarding.
+Il progetto nasce in ambito formativo ma rappresenta un'implementazione reale e funzionante di una rete strutturata.
+Il server Debian è dotato di tre interfacce (bridge + 2 LAN) e gestisce routing, NAT e assegnazione DHCP tramite server KEA.
+La LAN1 (enp0s8) ospita client Linux — Fedora (10.0.10.101) e Ubuntu (10.0.10.102) — mentre la LAN2 (enp0s9)...
+[testo del link](ARP_SPOOFING.TXT)
