@@ -5,4 +5,7 @@ Il progetto nasce in ambito formativo ma rappresenta un'implementazione reale e 
 Il server Debian è dotato di tre interfacce (bridge + 2 LAN) e gestisce routing, NAT e assegnazione DHCP tramite server KEA.
 La LAN1 (enp0s8) ospita client Linux — Fedora (10.0.10.101) e Ubuntu (10.0.10.102) — mentre la LAN2 (enp0s9)...
 
+
 [prova](/comandi_win.txt)
+[prova2](/zaino/apparmor.txt)
+
