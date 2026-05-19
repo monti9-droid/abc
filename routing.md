@@ -1,4 +1,4 @@
-
+#### Routing & Firewalling (Iptables)
 Il Gateway Debian 13 agisce come Stateful Firewall per l'intera infrastruttura del laboratorio. La logica di sicurezza applicata segue il principio del **Minimo Privilegio**: tutto ciò che non è esplicitamente permesso viene bloccato alla radice.
 
 Lo script completo è disponibile in questa cartella come `iptables-router.sh`.
