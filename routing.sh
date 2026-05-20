@@ -1,126 +1,47 @@
-#### Routing & Firewalling (Iptables)
-Il Gateway Debian 13 agisce come Stateful Firewall per l'intera infrastruttura del laboratorio. La logica di sicurezza applicata segue il principio del **Minimo Privilegio**: tutto ciò 
-che non è esplicitamente permesso viene bloccato alla radice.
-
-Lo script completo è disponibile nella cartella `config` come `iptables-router.sh`.
-Punti Chiave dell'Architettura del Firewall
-
-#### 1. APPROCCIO STATEFUL (Connection Tracking)
-Per ottimizzare le prestazioni e garantire la sicurezza, il firewall analizza lo stato delle connessioni grazie al modulo `conntrack`:
-
-iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-
-Questo permette di accettare automaticamente i pacchetti di ritorno per le connessioni già stabilite (es. una risposta web a una richiesta partita da una delle LAN), 
-senza dover aprire porte in ingresso.
-
-### 2. NETWORK ADDRESS TRANSLATION (NAT) & FORWARDING
-Il mascheramento dell'interfaccia WAN permette ai client interni di navigare su Internet utilizzando l'IP del Gateway:
-
-iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
-
-Il routing tra le interfacce è completato dall'abilitazione dell'IP Forwarding a livello di Kernel Linux: echo 1 > /proc/sys/net/ipv4/ip_forward.
-
-### 3. SEGMENTAZIONE DELLE ZONE (LAN & VPN)
-Le regole di FORWARD applicate isolano e collegano le reti in modo mirato:
-
-Inter-LAN Routing: È consentita la comunicazione bidirezionale tra la rete Linux (enp0s8) e la rete Windows (enp0s9) per permettere l'integrazione dei sistemi con Active Directory.
-
-VPN (WireGuard): L'interfaccia wg0 è configurata per instradare il traffico di gestione sia verso Internet che verso entrambe le LAN interne, consentendo l'amministrazione remota sicura sulla porta UDP 51820.
-
-4. Hardening delle Policy di Default
-
-A riprova di una configurazione sicura, le catene di INPUT e FORWARD hanno come politica nativa il DROP:
-
-
-iptables -P INPUT DROP
-iptables -P FORWARD DROP
-
-#### Routing & Firewalling (Iptables)
-Il Gateway Debian 13 agisce come Stateful Firewall per l'intera infrastruttura del laboratorio. La logica di sicurezza applicata segue il principio del **Minimo Privilegio**: tutto ciò 
-che non è esplicitamente permesso viene bloccato alla radice.
-
-Lo script completo è disponibile nella cartella `config` come `iptables-router.sh`.
-Punti Chiave dell'Architettura del Firewall
-
-#### 1. APPROCCIO STATEFUL (Connection Tracking)
-Per ottimizzare le prestazioni e garantire la sicurezza, il firewall analizza lo stato delle connessioni grazie al modulo `conntrack`:
-
-iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
-
-Questo permette di accettare automaticamente i pacchetti di ritorno per le connessioni già stabilite (es. una risposta web a una richiesta partita da una delle LAN), 
-senza dover aprire porte in ingresso.
-
-### 2. NETWORK ADDRESS TRANSLATION (NAT) & FORWARDING
-Il mascheramento dell'interfaccia WAN permette ai client interni di navigare su Internet utilizzando l'IP del Gateway:
-
-iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
-
-Il routing tra le interfacce è completato dall'abilitazione dell'IP Forwarding a livello di Kernel Linux: echo 1 > /proc/sys/net/ipv4/ip_forward.
-
-### 3. SEGMENTAZIONE DELLE ZONE (LAN & VPN)
-Le regole di FORWARD applicate isolano e collegano le reti in modo mirato:
-
-Inter-LAN Routing: È consentita la comunicazione bidirezionale tra la rete Linux (enp0s8) e la rete Windows (enp0s9) per permettere l'integrazione dei sistemi con Active Directory.
-
-VPN (WireGuard): L'interfaccia wg0 è configurata per instradare il traffico di gestione sia verso Internet che verso entrambe le LAN interne, consentendo l'amministrazione remota sicura sulla porta UDP 51820.
-
-4. Hardening delle Policy di Default
-
-A riprova di una configurazione sicura, le catene di INPUT e FORWARD hanno come politica nativa il DROP:
-
-
-iptables -P INPUT DROP
-iptables -P FORWARD DROP
-
-
-#!/bin/sh
-
-RESET DELLE REGOLE PRECEDENTI
-Pulisce (Flush) tutte le catene esistenti per evitare conflitti al riavvio dell'interfaccia
+# Azzera tutte le regole esistenti (INPUT, FORWARD, OUTPUT)
 iptables -F
+# Azzera le regole della tabella nat
 iptables -t nat -F
-iptables -X
 
-Politica restrittiva: blocca tutto il traffico in ingresso non esplicitamente autorizzato
-iptables -P INPUT DROP
-iptables -P FORWARD DROP
-iptables -P OUTPUT ACCEPT
-
-ABILITAZIONE DEL ROUTING A LIVELLO KERNEL 
-Attiva l'IP Forwarding in modo transitorio nello script (garantisce il transito dei pacchetti tra le LAN)
-echo 1 > /proc/sys/net/ipv4/ip_forward
-
- REGOLE DI LOOPBACK E STATO COLLOCATO ---
- Consente il traffico interno alla macchina stessa (localhost)
+# Accetta tutto il traffico sul loopback (localhost)
 iptables -A INPUT -i lo -j ACCEPT
-# State Tracking: Accetta i pacchetti in entrata che fanno parte di connessioni già stabilite o correlate (es. risposte web)
+# Accetta pacchetti di connessioni già stabilite o correlate
 iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+# Accetta connessioni SSH in entrata
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+# Accetta connessioni WireGuard in entrata
+iptables -A INPUT -p udp --dport 51820 -j ACCEPT
+# Accetta ping
+iptables -A INPUT -p icmp -j ACCEPT
 
-# --- REGOLE DI ACCESSO AI SERVIZI DEL GATEWAY (INPUT) ---
-# Consente il traffico SSH, DHCP (KEA) e DNS dalle sole reti interne del laboratorio
-iptables -A INPUT -i enp0s8 -p udp --dport 67:68 -j ACCEPT
-iptables -A INPUT -i enp0s8 -p tcp --dport 22 -j ACCEPT
-iptables -A INPUT -i enp0s9 -p tcp --dport 22 -j ACCEPT
+# NAT: masquerade del traffico in uscita su enp0s3 (WAN/internet),nasconde gi IP privati dietro quello pubblico/bridge
+iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
 
-# --- POLITICHE DI INTRADAMENTO (FORWARDING INTER-LAN & WAN) ---
-# 1. Permette ai client interni (LAN 1 e LAN 2) di uscire verso Internet tramite la WAN (enp0s3)
+# Accetta in FORWARD le connessioni già stabilite o correlate
+iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+# Forwarding da VPN WireGuard verso tutte e tre le interfacce (LAN client Linux, rete Windows/AD/DC, WAN)
+iptables -A FORWARD -i wg0 -o enp0s9 -j ACCEPT
+iptables -A FORWARD -i wg0 -o enp0s8 -j ACCEPT
+iptables -A FORWARD -i wg0 -o enp0s3 -j ACCEPT
+
+# Forwarding dalla LAN client Linux e dalla rete Windows verso internet
 iptables -A FORWARD -i enp0s8 -o enp0s3 -j ACCEPT
 iptables -A FORWARD -i enp0s9 -o enp0s3 -j ACCEPT
 
-# 2. Consente il transito bidirezionale tra le due LAN interne per permettere l'autenticazione su AD
-iptables -A FORWARD -i enp0s8 -o enp0s9 -j ACCEPT
+# Forwarding tra rete Windows/AD/DC e LAN client Linux (bidirezionale)
 iptables -A FORWARD -i enp0s9 -o enp0s8 -j ACCEPT
+iptables -A FORWARD -i enp0s8 -o enp0s9 -j ACCEPT
 
-# 3. Consente il traffico di ritorno da Internet verso le reti interne
-iptables -A FORWARD -i enp0s3 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+# Policy di default: blocca tutto il traffico in entrata e forward non esplicitamente permesso
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+# Output libero
+iptables -P OUTPUT ACCEPT
 
-# --- NETWORK ADDRESS TRANSLATION (NAT / MASQUERADE) ---
-# Nasconde gli IP privati delle LAN dietro l'unico IP pubblico/bridge dell'interfaccia WAN enp0s3
-iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
+# Abilita il forwarding IPv4 a livello kernel
+echo 1 > /proc/sys/net/ipv4/ip_forward
 
-In questo modo, qualsiasi pacchetto non autorizzato dalle regole precedenti viene scartato silenziosamente.
 
 
 
