@@ -31,7 +31,10 @@ log () {
 log "___Avvio Backup__"
 
 # Backup rsync
-
+#-aAXv:      -a: modalità archivio , preserva permessi, ownership, timestap, symlink, dir ricorsive
+#            -A: preserva ACL
+#            -X: preserva extended attributes 
+#            -v: verbose
 if rsync -aAXv --delete "${SOURCE}" "${DEST}" >> "${LOGFILE}" 2>&1; then
      log "SUCCESSO: Backup completato in ${DEST}"
 else
