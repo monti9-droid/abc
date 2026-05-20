@@ -26,7 +26,7 @@ Rsync e Cron gestiscono ,in modo incrementale il backup automatizzato tramite sc
 
 [Windows Domain Controller - Activer Directory](windowsADDCDNS)
 
-#### Samba Winbind CUPS
+[Samba Winbind CUPS](samba.conf)
 
 #### Docker Prometheus Grafana Promtail Loki
 
