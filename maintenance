@@ -55,3 +55,9 @@ for OLD in ${OLD_BACKUPS}; do
 done
 
 log "__Fine backup__"
+
+----------------------------------------------------------------------------------
+crontab -e
+0 2 * * * /usr/local/bin/backup-samba.sh >> /var/log/backup-samba.log 2>&1
+## esegue il backup ogni notte alle 02:00 ##
+
