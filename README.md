@@ -6,7 +6,7 @@ Questo repository nasce con l'obiettivo di documentare la creazione di un ambien
 
 La struttura è questa:
 
-Server Debian 13 "Trixie" (Oracle VM) configurato con funzioni di routing e Nat tramit Iptable e Ip forwarding e DHCP Kea,ospita 3 interfacce:
+Server Debian 13 "Trixie" (Oracle VM) configurato con funzioni di routing e Nat tramite Iptablea e Ip forwarding e DHCP Kea,ospita 3 interfacce:
 1 bridge (enp0s3) e 2 LAN (LAN1=enp0s8, LAN2=enp0s9)
 
 la prima LAN (10.0.10.1) è destinata a 2 client Linux (Fedora=10.0.10.101, Ubuntu=10.0.10.102), la seconda invece (10.0.20.1) collega il server Debian
@@ -22,7 +22,7 @@ Rsync e Cron gestiscono ,in modo incrementale il backup automatizzato tramite sc
 
 [Routing e Nat](routing.sh)
 
-#### DHCP
+[DHCP](kea-dhcp4.conf)
 
 #### Windows Server AD DNS
 
