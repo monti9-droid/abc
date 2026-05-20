@@ -1,6 +1,6 @@
 #### Routing & Firewalling (Iptables)
 Il Gateway Debian 13 agisce come Stateful Firewall per l'intera infrastruttura del laboratorio. La logica di sicurezza applicata segue il principio del **Minimo Privilegio**: tutto ciò che non è esplicitamente permesso viene bloccato alla radice.
-Lo script completo è disponibile in questa cartella come `iptables-router.sh`.
+Lo script completo è disponibile nella cartella `config` come `iptables-router.sh`.
 Punti Chiave dell'Architettura del Firewall
 
 #### 1. Approccio Stateful (Connection Tracking)
@@ -18,6 +18,7 @@ Il mascheramento dell'interfaccia WAN permette ai client interni di navigare su 
 iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
 
 Il routing tra le interfacce è completato dall'abilitazione dell'IP Forwarding a livello di Kernel Linux: echo 1 > /proc/sys/net/ipv4/ip_forward.
+
 3. Segmentazione delle Zone (LAN & VPN)
 Le regole di FORWARD applicate isolano e collegano le reti in modo mirato:
 
