@@ -3,6 +3,7 @@ Loki e Promtail gestiscono i log, Grafana li visualizza sulla porta 3000.
 
 
 PROMTAIL (config.yml)
+-----------------------------------------------------------------------------------------------------
 
 
 server:
@@ -35,6 +36,7 @@ scrape_configs:
 
 
 PROMETHEUS (prometheus.yml)
+---------------------------------------------------------------------------------------------------
 
 global:
   # Intervallo di raccolta metriche: ogni 15 secondi va a "bussare" a tutti i target
@@ -64,9 +66,8 @@ scrape_configs:
 
 
 
-
 DOCKER (docker-compose.yml)
-
+---------------------------------------------------------------------------------------------------
 services:
   prometheus:
     image: prom/prometheus
