@@ -14,7 +14,7 @@ a una macchina Windows Server, Controller di Dominio, che gestisce Active Direct
 della rete privata passa crittografato nel tunnel di WireGuard (VPN).
 
 Samba, da Debian, tramite Winbind si interfaccia con AD, e per mezzo di CUPS gestisce un Print Server condiviso.
-Grafana, Prometheus, Loki, Promtail e cAdvisor, containerizzati in Docker, monitorano e loggano, lo stato delle macchine e della rete.
+Grafana, Prometheus, Loki, Promtail e cAdvisor, containerizzati in Docker, monitorano e loggano lo stato delle macchine e della rete.
 
 Rsync e Cron gestiscono ,in modo incrementale il backup automatizzato tramite script.
 
