@@ -32,6 +32,7 @@ Bash
 
 iptables -P INPUT DROP
 iptables -P FORWARD DROP
+```bash
 
 #!/bin/sh
 
