@@ -1,5 +1,5 @@
-Stack di monitoraggio containerizzato via Docker Compose. Prometheus e cAdvisor raccolgono metriche, 
-Loki e Promtail gestiscono i log, Grafana li visualizza sulla porta 3000.
+##Stack di monitoraggio containerizzato via Docker Compose. Prometheus e cAdvisor raccolgono metriche, 
+##Loki e Promtail gestiscono i log, Grafana li visualizza sulla porta 3000.
 
 
 PROMTAIL (config.yml)
@@ -129,4 +129,4 @@ volumes:
   grafana_data:
 
 
-Usare l'Explore di Grafana con la query {job=~".*"} per vedere quali label stanno effettivamente arrivando a Loki prima di impazzire sul JSON.
+##Usare l'Explore di Grafana con la query {job=~".*"} per vedere quali label stanno effettivamente arrivando a Loki prima di impazzire sul JSON.
