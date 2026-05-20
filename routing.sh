@@ -36,11 +36,49 @@ A riprova di una configurazione sicura, le catene di INPUT e FORWARD hanno come 
 iptables -P INPUT DROP
 iptables -P FORWARD DROP
 
+#### Routing & Firewalling (Iptables)
+Il Gateway Debian 13 agisce come Stateful Firewall per l'intera infrastruttura del laboratorio. La logica di sicurezza applicata segue il principio del **Minimo Privilegio**: tutto ciò 
+che non è esplicitamente permesso viene bloccato alla radice.
+
+Lo script completo è disponibile nella cartella `config` come `iptables-router.sh`.
+Punti Chiave dell'Architettura del Firewall
+
+#### 1. APPROCCIO STATEFUL (Connection Tracking)
+Per ottimizzare le prestazioni e garantire la sicurezza, il firewall analizza lo stato delle connessioni grazie al modulo `conntrack`:
+
+iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+
+Questo permette di accettare automaticamente i pacchetti di ritorno per le connessioni già stabilite (es. una risposta web a una richiesta partita da una delle LAN), 
+senza dover aprire porte in ingresso.
+
+### 2. NETWORK ADDRESS TRANSLATION (NAT) & FORWARDING
+Il mascheramento dell'interfaccia WAN permette ai client interni di navigare su Internet utilizzando l'IP del Gateway:
+
+iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
+
+Il routing tra le interfacce è completato dall'abilitazione dell'IP Forwarding a livello di Kernel Linux: echo 1 > /proc/sys/net/ipv4/ip_forward.
+
+### 3. SEGMENTAZIONE DELLE ZONE (LAN & VPN)
+Le regole di FORWARD applicate isolano e collegano le reti in modo mirato:
+
+Inter-LAN Routing: È consentita la comunicazione bidirezionale tra la rete Linux (enp0s8) e la rete Windows (enp0s9) per permettere l'integrazione dei sistemi con Active Directory.
+
+VPN (WireGuard): L'interfaccia wg0 è configurata per instradare il traffico di gestione sia verso Internet che verso entrambe le LAN interne, consentendo l'amministrazione remota sicura sulla porta UDP 51820.
+
+4. Hardening delle Policy di Default
+
+A riprova di una configurazione sicura, le catene di INPUT e FORWARD hanno come politica nativa il DROP:
+
+
+iptables -P INPUT DROP
+iptables -P FORWARD DROP
+
 
 #!/bin/sh
 
 RESET DELLE REGOLE PRECEDENTI
- Pulisce (Flush) tutte le catene esistenti per evitare conflitti al riavvio dell'interfaccia
+Pulisce (Flush) tutte le catene esistenti per evitare conflitti al riavvio dell'interfaccia
 iptables -F
 iptables -t nat -F
 iptables -X
@@ -83,5 +121,8 @@ iptables -A FORWARD -i enp0s3 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCE
 iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
 
 In questo modo, qualsiasi pacchetto non autorizzato dalle regole precedenti viene scartato silenziosamente.
+
+
+
 
 
