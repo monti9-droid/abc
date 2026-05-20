@@ -1,0 +1,3 @@
+routing linguist-language=INI
+interfaces.md=INI
+kea-dhcp4.conf linguist-language=JSON
