@@ -2,7 +2,7 @@
 
 Questa sezione documenta l'infrastruttura di identità e risoluzione dei nomi del laboratorio, centralizzata su un Domain Controller **Windows Server**.
 
-L'estrazione dei dati e la manutenzione del server sono stati eseguiti sfruttando il tunnel VPN/SSH dal Gateway Debian.
+L'estrazione dei dati e la manutenzione del server sono stati eseguiti sfruttando il tunnel VPN/SSH dal Gateway Debian, al fine di testare meglio la struttura.
 Macchina fisica (CMD) → SSH su Fedora/Debian → Cockpit sul browser → SSH verso il DC Windows → Powershell
 
 
