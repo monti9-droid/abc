@@ -24,7 +24,7 @@ Rsync e Cron gestiscono ,in modo incrementale il backup automatizzato tramite sc
 
 [DHCP](kea-dhcp4.conf)
 
-#### Windows Server AD DNS
+[Windows Domain Controller - Activer Directory](windowsADDCDNS)
 
 #### Samba Winbind CUPS
 
