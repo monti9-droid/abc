@@ -2,7 +2,7 @@ Stack di monitoraggio containerizzato via Docker Compose. Prometheus e cAdvisor 
 Loki e Promtail gestiscono i log, Grafana li visualizza sulla porta 3000.
 
 
-PROMTAIL
+PROMTAIL (config.yml)
 
 
 server:
@@ -34,7 +34,7 @@ scrape_configs:
 
 
 
-Prometheus.yml
+PROMETHEUS (prometheus.yml)
 
 global:
   # Intervallo di raccolta metriche: ogni 15 secondi va a "bussare" a tutti i target
@@ -65,7 +65,7 @@ scrape_configs:
 
 
 
-docker-compose.yml
+DOCKER (docker-compose.yml)
 
 services:
   prometheus:
