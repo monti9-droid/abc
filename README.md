@@ -20,7 +20,7 @@ Rsync e Cron gestiscono ,in modo incrementale il backup automatizzato tramite sc
 
 #### Interfaces
 
-[Routing e Nat](routing.txt)
+[Routing e Nat](routing.sh)
 
 #### DHCP
 
