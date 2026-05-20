@@ -45,6 +45,8 @@ fi
 # Rotazione: elimina backup più vecchi
 cd "${BACKUP_ROOT}" || exit 1
 
+# 1. ls -1dt */  -> Elenca le cartelle (-d) su una singola colonna (-1) ordinate dalla più recente alla più vecchia (-t)
+# 2. tail -n +8 -> Salta le prime 7 cartelle (i backup da tenere) e prende solo quelle dall'ottava in poi
 OLD_BACKUPS=$(ls -1dt backup_* 2>/dev/null | tail -n +$((RETENTION + 1)))
   
 for OLD in ${OLD_BACKUPS}; do
