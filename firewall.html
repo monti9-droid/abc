@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurazione Firewall IPTables</title>
+  
+  <!-- 1. Carichiamo lo stile per la colorazione del codice (Tema scuro "Tomorrow Night") -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 40px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      color: #111;
+      border-bottom: 2px solid #eaecef;
+      padding-bottom: 10px;
+      margin-top: 0;
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #555;
+    }
+
+    /* Personalizzazione della finestra del codice per farla risaltare */
+    pre[class*="language-"] {
+      border-radius: 8px;
+      margin: 20px 0;
+      padding: 20px;
+      font-size: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>Script di Configurazione Firewall (Bash)</h1>
+    <p>Di seguito trovi lo script di inizializzazione delle regole per <code>iptables</code>, con la gestione del NAT e l'apertura delle porte per SSH e WireGuard.</p>
+
+    <!-- 2. Il tuo script inserito nei tag corretti. La classe "language-bash" attiva la magia. -->
+    <pre><code class="language-bash">#!/bin/bash
+# Azzera tutte le regole esistenti (INPUT, FORWARD, OUTPUT)
+iptables -F
+# Azzera le regole della tabella nat
+iptables -t nat -F
+
+# Accetta tutto il traffico sul loopback (localhost)
+iptables -A INPUT -i lo -j ACCEPT
+# Accetta pacchetti di connessioni già stabilite o correlate
+iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+# Accetta connessioni SSH in entrata
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+# Accetta connessioni WireGuard in entrata
+iptables -A INPUT -p udp --dport 51820 -j ACCEPT
+# Accetta ping
+iptables -A INPUT -p icmp -j ACCEPT
+
+# NAT: masquerade del traffico in uscita su enp0s3 (WAN/internet), nasconde gli IP privati dietro quello pubblico/bridge
+iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
+
+# Accetta in FORWARD le connessioni già stabilite o correlate
+iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT</code></pre>
+
+  </div>
+
+  <!-- 3. Gli script in fondo alla pagina per elaborare la colorazione dei comandi Shell -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+
+</body>
+</html>
