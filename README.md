@@ -15,19 +15,7 @@ Il brano standard del Lorem Ipsum usato sin dal sedicesimo secolo è riprodotto 
 
 [Interfaces](interfaces)
 
-[Routing e Nat](routing.sh)
 
-[VPN](VPN)
-
-[DHCP](kea-dhcp4.conf)
-
-[Windows Domain Controller - Activer Directory](windowsADDCDNS)
-
-[Samba Winbind CUPS](samba.conf)
-
-[Docker Prometheus Grafana Promtail Loki](DOCKERPROMGRAF)
-
-[Mainteinance](maintenance)
 
 
 
