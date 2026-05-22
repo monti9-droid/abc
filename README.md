@@ -1,22 +1,17 @@
 
-### PREMESSA
-Mi presento: sono Alessandro, ho recentemente completato un corso di 300 ore presso il CEFI, focalizzato sulla gestione dei sistemi e sulla sicurezza informatica.
+Cos’è Lorem Ipsum?
 
-Questo repository nasce con l'obiettivo di documentare la creazione di un ambiente aziendale simulato in cui il Domain Controller Windows gestisce Active Directory e DNS, mentre i sistemi Debian ospitano tutti i servizi infrastrutturali complementari
+Lorem Ipsum è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione. È sopravvissuto non solo a più di cinque secoli, ma anche al passaggio alla videoimpaginazione, pervenendoci sostanzialmente inalterato. Fu reso popolare, negli anni ’60, con la diffusione dei fogli di caratteri trasferibili “Letraset”, che contenevano passaggi del Lorem Ipsum, e più recentemente da software di impaginazione come Aldus PageMaker, che includeva versioni del Lorem Ipsum.
+Perchè lo utilizziamo?
 
-La struttura è questa:
+È universalmente riconosciuto che un lettore che osserva il layout di una pagina viene distratto dal contenuto testuale se questo è leggibile. Lo scopo dell’utilizzo del Lorem Ipsum è che offre una normale distribuzione delle lettere (al contrario di quanto avviene se si utilizzano brevi frasi ripetute, ad esempio “testo qui”), apparendo come un normale blocco di testo leggibile. Molti software di impaginazione e di web design utilizzano Lorem Ipsum come testo modello. Molte versioni del testo sono state prodotte negli anni, a volte casualmente, a volte di proposito (ad esempio inserendo passaggi ironici).
 
-Server Debian 13 "Trixie" (Oracle VM), configurato con funzioni di routing e Nat tramite Iptables e Ip forwarding e DHCP Kea,ospita 3 interfacce:
-1 bridge (enp0s3) e 2 LAN (LAN1=enp0s8, LAN2=enp0s9)
+Da dove viene?
 
-la prima LAN (10.0.10.1) è destinata a 2 client Linux (Fedora=10.0.10.101, Ubuntu=10.0.10.102), la seconda invece (10.0.20.1) collega il server Debian
-a una macchina Windows Server, Controller di Dominio, che gestisce Active Directory e server DNS , per tutta la stuttura.Tutto il traffico
-della rete privata passa crittografato nel tunnel di WireGuard (VPN).
+Al contrario di quanto si pensi, Lorem Ipsum non è semplicemente una sequenza casuale di caratteri. Risale ad un classico della letteratura latina del 45 AC, cosa che lo rende vecchio di 2000 anni. Richard McClintock, professore di latino al Hampden-Sydney College in Virginia, ha ricercato una delle più oscure parole latine, consectetur, da un passaggio del Lorem Ipsum e ha scoperto tra i vari testi in cui è citata, la fonte da cui è tratto il testo, le sezioni 1.10.32 and 1.10.33 del "de Finibus Bonorum et Malorum" di Cicerone. Questo testo è un trattato su teorie di etica, molto popolare nel Rinascimento. La prima riga del Lorem Ipsum, "Lorem ipsum dolor sit amet..", è tratta da un passaggio della sezione 1.10.32.
 
-Samba, da Debian, tramite Winbind si interfaccia con AD, e per mezzo di CUPS gestisce un Print Server condiviso.
-Grafana, Prometheus, Loki, Promtail e cAdvisor, containerizzati in Docker, monitorano e loggano lo stato delle macchine e della rete.
+Il brano standard del Lorem Ipsum usato sin dal sedicesimo secolo è riprodotto qui di seguito per coloro che fossero interessati. Anche le sezioni 1.10.32 e 1.10.33 del "de Finibus Bonorum et Malorum" di Cicerone sono riprodotte nella loro forma originale, accompagnate dalla traduzione inglese del 1914 di H. Rackham.
 
-Rsync e Cron gestiscono ,in modo incrementale il backup automatizzato tramite script.
 
 [Interfaces](interfaces)
 
