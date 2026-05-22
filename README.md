@@ -2,6 +2,7 @@
 <h1>Il mondo del Lorem Ipsum</h1>
 
 <!-- Sezione 1 -->
+<p align="left">Questo testo sarà sicuramente allineato a sinistra.</p>
 <h2>Cos’è Lorem Ipsum?</h2>
 <p>
   <strong>Lorem Ipsum</strong> è un testo segnaposto utilizzato nel settore della tipografia e della stampa. Lorem Ipsum è considerato il testo segnaposto standard sin dal sedicesimo secolo, quando un anonimo tipografo prese una cassetta di caratteri e li assemblò per preparare un testo campione.
