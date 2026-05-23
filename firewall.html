@@ -26,66 +26,61 @@
     --colore-bordo: #334155;            /* Separatori discreti */
   }
 
-  /* Sfondo globale della pagina */
-  html, body {
+  /* Lo sfondo reale della finestra del browser */
+  html {
     background-color: var(--colore-sfondo) !important;
-    color: var(--colore-testo-principale) !important;
     margin: 0;
     padding: 0;
   }
 
- /* 1. Il contenitore principale: dà spazio ai lati senza rompere i blocchi interni */
-.container { 
-  width: 100%;
-  max-width: 1100px;         /* Impedisce alla pagina di allargarsi all'infinito sui monitor grandi */
-  margin: 0 auto;            /* Centra l'intera pagina nel monitor */
-  padding: 20px 25px;        /* 20px di spazio sopra/sotto, 25px di sicurezza ai lati */
-  box-sizing: border-box; 
-}
+  /* IL TRUCCO MAGICO: Centriamo direttamente il body. 
+     Così, anche se non hai un <div class="container">, la pagina si allinea perfettamente al centro! */
+  body {
+    background-color: var(--colore-sfondo) !important;
+    color: var(--colore-testo-principale) !important;
+    max-width: 1100px;           /* Impedisce al testo di spalmarsi su tutto lo schermo */
+    margin: 40px auto !important; /* Centra il blocco e si stacca un po' dal soffitto (40px) */
+    padding: 0 24px !important;  /* Crea il cuscinetto di sicurezza a destra e a sinistra */
+    box-sizing: border-box;
+    font-family: sans-serif;     /* Rende il testo più moderno e leggibile */
+  }
 
-/* 2. I titoli e i paragrafi: mantengono un allineamento pulito a sinistra */
-h1, p {
-  text-align: left;
-  margin-left: 0;
-  margin-right: 0;
-}
+  /* Mantieni allineato anche il container se presente */
+  .container { 
+    width: 100%;
+    box-sizing: border-box; 
+  }
 
-/* 3. I blocchi di codice: impediamo che si stringano o che spacchino il layout */
-pre[class*="language-"], 
-pre {
-  width: 100%;               /* Prende tutta la larghezza del contenitore */
-  box-sizing: border-box; 
-  margin: 24px 0;            /* Stacca il blocco di codice dal testo sopra e sotto */
-  padding: 18px;             /* Spazio interno tra il codice e il bordo della scatola */
-  border-radius: 8px;
-  overflow-x: auto;          /* SE IL CODICE È TROPPO LUNGO, APPARE LA BARRA DI SCORRIMENTO ORIZZONTALE (Evita il macello!) */
-  white-space: pre;          /* Mantiene la formattazione originale del codice senza inventare a capo strani */
-
-}
-
-  /* I tuoi titoli (h1) e paragrafi (p) adattati ai nuovi colori chiari */
+  /* Titoli puliti e ordinati */
   h1 { 
-    font-size: 1.0rem; 
+    font-size: 1.6rem; 
     color: var(--colore-testo-principale); 
     border-bottom: 2px solid var(--colore-bordo); 
     padding-bottom: 10px; 
     margin-top: 0; 
+    margin-bottom: 20px;
+    text-align: left;
   }
   
+  /* Paragrafi con il tuo grigio azzurrato */
   p { 
     font-size: 1.0rem; 
     color: var(--colore-testo-secondario); 
+    line-height: 1.6; /* Rende i testi lunghi molto più facili da leggere */
+    text-align: left;
   }
 
-  /* Forza i blocchi di Prism a prendere il tuo blu notte e i bordi arrotondati che volevi */
+  /* UNICO BLOCCO PER IL CODICE (Prism): Niente più conflitti o sovrascritture */
   pre, code, pre[class*="language-"], code[class*="language-"] {
     background-color: var(--colore-scatola) !important;
     border: 1px solid var(--colore-bordo) !important;
-    border-radius: 8px; /* I tuoi bordi arrotondati */
-    margin: 20px 0; 
-    padding: 20px; 
-    font-size: 1rem; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Ombra leggermente più scura per il blu */
+    border-radius: 8px !important;              /* I tuoi bellissimi bordi arrotondati */
+    margin: 24px 0 !important; 
+    padding: 18px !important; 
+    font-size: 0.95rem !important; 
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important; /* Ombra per dare profondità sul blu */
+    overflow-x: auto !important;                /* Barra di scorrimento se il codice è lungo */
+    white-space: pre !important;                 /* Evita che il codice vada a capo da solo rompendo la sintassi */
   }
 
   /* Forza i commenti a essere grigio azzurrati e in corsivo */
