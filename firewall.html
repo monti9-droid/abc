@@ -34,13 +34,33 @@
     padding: 0;
   }
 
-  /* La tua struttura container (adesso pulita dentro lo style) */
+ /* 1. Il contenitore principale: dà spazio ai lati senza rompere i blocchi interni */
 .container { 
-  width: 100%; 
-  max-width: 100%; 
-  padding-left: 5%;   /* Crea un cuscinetto del 5% a sinistra */
-  padding-right: 5%;  /* Crea un cuscinetto del 5% a destra */
+  width: 100%;
+  max-width: 1100px;         /* Impedisce alla pagina di allargarsi all'infinito sui monitor grandi */
+  margin: 0 auto;            /* Centra l'intera pagina nel monitor */
+  padding: 20px 25px;        /* 20px di spazio sopra/sotto, 25px di sicurezza ai lati */
   box-sizing: border-box; 
+}
+
+/* 2. I titoli e i paragrafi: mantengono un allineamento pulito a sinistra */
+h1, p {
+  text-align: left;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* 3. I blocchi di codice: impediamo che si stringano o che spacchino il layout */
+pre[class*="language-"], 
+pre {
+  width: 100%;               /* Prende tutta la larghezza del contenitore */
+  box-sizing: border-box; 
+  margin: 24px 0;            /* Stacca il blocco di codice dal testo sopra e sotto */
+  padding: 18px;             /* Spazio interno tra il codice e il bordo della scatola */
+  border-radius: 8px;
+  overflow-x: auto;          /* SE IL CODICE È TROPPO LUNGO, APPARE LA BARRA DI SCORRIMENTO ORIZZONTALE (Evita il macello!) */
+  white-space: pre;          /* Mantiene la formattazione originale del codice senza inventare a capo strani */
+
 }
 
   /* I tuoi titoli (h1) e paragrafi (p) adattati ai nuovi colori chiari */
