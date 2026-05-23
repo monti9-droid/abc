@@ -1,5 +1,4 @@
-HTML
-<!-- Forzatura Pagina Nuova V3 -->
+<!-- Versione Pulita e Definitiva V4 -->
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -7,7 +6,6 @@ HTML
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Configurazione Firewall IPTables</title>
   
-  <!-- Fogli di stile -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 
   <style>
@@ -28,7 +26,7 @@ HTML
     body {
       background-color: var(--colore-sfondo) !important;
       color: var(--colore-testo-principale) !important;
-      max-width: 1000px;
+      max-width: 900px; /* Leggermente più stretto per aumentare la leggibilità */
       margin: 40px auto !important;
       padding: 0 24px !important;
       box-sizing: border-box;
@@ -55,8 +53,22 @@ HTML
       line-height: 1.6; 
     }
 
-    /* LA CORAZZA: Forziamo il contenitore a prescindere da quello che fa Prism */
-    pre, code, pre[class*="language-"], code[class*="language-"] {
+    /* 1. REGOLA PER LE PAROLINE DI CODICE DENTRO IL TESTO: 
+       Evita che singole parole come iptables creino scatoloni giganti */
+    p code {
+      background-color: rgba(255, 255, 255, 0.1) !important;
+      color: #38bdf8 !important; /* Un bell'azzurro vivido */
+      padding: 2px 6px !important;
+      border-radius: 4px !important;
+      font-family: monospace !important;
+      font-size: 0.95rem !important;
+      box-shadow: none !important;
+      border: none !important;
+      display: inline !important; /* Rimane dentro la riga di testo */
+    }
+
+    /* 2. REGOLA SOLO PER IL BLOCCO DI CODICE GRANDE (IL LISTATO BASH) */
+    pre, pre[class*="language-"] {
       display: block !important;
       width: 100% !important;
       max-width: 100% !important;
@@ -65,9 +77,18 @@ HTML
       border-radius: 8px !important;
       margin: 24px 0 !important; 
       padding: 18px !important; 
-      font-size: 0.95rem !important; 
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
-      overflow-x: auto !important;
+      overflow-x: auto !important; /* La barra appare SOLO se il codice esce fuori dallo schermo */
+    }
+
+    /* Rimuove i conflitti di Prism dentro il palinsesto grande */
+    pre code, pre[class*="language-"] code {
+      background-color: transparent !important;
+      padding: 0 !important;
+      border-radius: 0 !important;
+      border: none !important;
+      box-shadow: none !important;
+      font-size: 0.95rem !important;
       white-space: pre !important;
     }
 
@@ -109,7 +130,6 @@ iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
 iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT</code></pre>
   </div>
 
-  <!-- Script JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
 
