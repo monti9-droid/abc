@@ -1,1 +1,110 @@
+<!-- Forzatura Aggiornamento Cache V2 -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configurazione Firewall IPTables</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 
+  <style>
+    :root {
+      --colore-sfondo: #0b1e2c;
+      --colore-scatola: #16415d;
+      --colore-testo-principale: #f8fafc;
+      --colore-testo-secondario: #94a3b8;
+      --colore-bordo: #334155;
+    }
+
+    html {
+      background-color: var(--colore-sfondo) !important;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--colore-sfondo) !important;
+      color: var(--colore-testo-principale) !important;
+      max-width: 1000px;
+      margin: 40px auto !important;
+      padding: 0 24px !important;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+
+    .container { 
+      width: 100%;
+      box-sizing: border-box; 
+    }
+
+    h1 { 
+      font-size: 1.8rem; 
+      color: var(--colore-testo-principale); 
+      border-bottom: 2px solid var(--colore-bordo); 
+      padding-bottom: 10px; 
+      margin-top: 0; 
+      margin-bottom: 20px;
+    }
+    
+    p { 
+      font-size: 1.05rem; 
+      color: var(--colore-testo-secondario); 
+      line-height: 1.6; 
+    }
+
+    pre, code, pre[class*="language-"], code[class*="language-"] {
+      background-color: var(--colore-scatola) !important;
+      border: 1px solid var(--colore-bordo) !important;
+      border-radius: 8px !important;
+      margin: 24px 0 !important; 
+      padding: 18px !important; 
+      font-size: 0.95rem !important; 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+      overflow-x: auto !important;
+      white-space: pre !important;
+    }
+
+    pre[class*="language-"] .token.comment,
+    code[class*="language-"] .token.comment,
+    .token.comment {
+      color: var(--colore-testo-secondario) !important;
+      font-style: italic !important;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Script di Configurazione Firewall (Bash)</h1>
+    <p>Di seguito trovi lo script di inizializzazione delle regole per <code>iptables</code>, con la gestione del NAT e l'apertura delle porte per SSH e WireGuard.</p>
+
+    <pre><code class="language-bash">#!/bin/bash
+# Azzera tutte le regole esistenti (INPUT, FORWARD, OUTPUT)
+iptables -F
+# Azzera le regole della tabella nat
+iptables -t nat -F
+
+# Accetta tutto il traffico sul loopback (localhost)
+iptables -A INPUT -i lo -j ACCEPT
+# Accetta pacchetti di connessioni già stabilite o correlate
+iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+# Accetta connessioni SSH in entrata
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+# Accetta connessioni WireGuard in entrata
+iptables -A INPUT -p udp --dport 51820 -j ACCEPT
+# Accetta ping
+iptables -A INPUT -p icmp -j ACCEPT
+
+# NAT: masquerade del traffico in uscita su enp0s3 (WAN/internet)
+iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
+
+# Accetta in FORWARD le connessioni già stabilite o correlate
+iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT</code></pre>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+
+</body>
+</html>
