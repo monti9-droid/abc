@@ -8,89 +8,81 @@
   <!-- 1. Carichiamo lo stile per la colorazione del codice (Tema scuro "Tomorrow Night") -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 
-<!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Il Mio Portfolio DevOps</title>
-
-  <!-- Qui inseriamo il blocco CSS pulito senza tag duplicati -->
+  <!-- 2. Il blocco CSS pulito per la gestione della grafica -->
   <style>
-  :root {
-    --colore-sfondo: #0b1e2c;           /* Blu notte molto scuro per tutta la pagina */
-    --colore-scatola: #16415d;          /* Il tuo blu notte per la finestra e i blocchi */
-    --colore-testo-principale: #f8fafc; /* Bianco latte per i testi */
-    --colore-testo-secondario: #94a3b8; /* Grigio azzurrato per descrizioni e commenti */
-    --colore-accento: #38bdf8;          /* Azzurro vivido per titoli e dettagli */
-    --colore-bordo: #334155;            /* Separatori discreti */
-  }
+    :root {
+      --colore-sfondo: #0b1e2c;           /* Blu notte molto scuro per tutta la pagina */
+      --colore-scatola: #16415d;          /* Il tuo blu notte per la finestra e i blocchi */
+      --colore-testo-principale: #f8fafc; /* Bianco latte per i testi */
+      --colore-testo-secondario: #94a3b8; /* Grigio azzurrato per descrizioni e commenti */
+      --colore-accento: #38bdf8;          /* Azzurro vivido per titoli e dettagli */
+      --colore-bordo: #334155;            /* Separatori discreti */
+    }
 
-  /* Lo sfondo reale della finestra del browser */
-  html {
-    background-color: var(--colore-sfondo) !important;
-    margin: 0;
-    padding: 0;
-  }
+    /* Lo sfondo reale della finestra del browser */
+    html {
+      background-color: var(--colore-sfondo) !important;
+      margin: 0;
+      padding: 0;
+    }
 
-  /* IL TRUCCO MAGICO: Centriamo direttamente il body. 
-     Così, anche se non hai un <div class="container">, la pagina si allinea perfettamente al centro! */
-  body {
-    background-color: var(--colore-sfondo) !important;
-    color: var(--colore-testo-principale) !important;
-    max-width: 1100px;           /* Impedisce al testo di spalmarsi su tutto lo schermo */
-    margin: 40px auto !important; /* Centra il blocco e si stacca un po' dal soffitto (40px) */
-    padding: 0 24px !important;  /* Crea il cuscinetto di sicurezza a destra e a sinistra */
-    box-sizing: border-box;
-    font-family: sans-serif;     /* Rende il testo più moderno e leggibile */
-  }
+    /* Centriamo direttamente il body per dare un layout pulito ed elegante */
+    body {
+      background-color: var(--colore-sfondo) !important;
+      color: var(--colore-testo-principale) !important;
+      max-width: 1000px;           /* Ridotto leggermente per farlo stare ancora più composto */
+      margin: 40px auto !important; /* Centra il blocco e lo stacca dal soffitto */
+      padding: 0 24px !important;  /* Cuscinetto di sicurezza a destra e a sinistra */
+      box-sizing: border-box;
+      font-family: sans-serif;     /* Rende il testo più moderno e leggibile */
+    }
 
-  /* Mantieni allineato anche il container se presente */
-  .container { 
-    width: 100%;
-    box-sizing: border-box; 
-  }
+    /* Il contenitore principale */
+    .container { 
+      width: 100%;
+      box-sizing: border-box; 
+    }
 
-  /* Titoli puliti e ordinati */
-  h1 { 
-    font-size: 1.6rem; 
-    color: var(--colore-testo-principale); 
-    border-bottom: 2px solid var(--colore-bordo); 
-    padding-bottom: 10px; 
-    margin-top: 0; 
-    margin-bottom: 20px;
-    text-align: left;
-  }
-  
-  /* Paragrafi con il tuo grigio azzurrato */
-  p { 
-    font-size: 1.0rem; 
-    color: var(--colore-testo-secondario); 
-    line-height: 1.6; /* Rende i testi lunghi molto più facili da leggere */
-    text-align: left;
-  }
+    /* Titoli puliti e ordinati */
+    h1 { 
+      font-size: 1.8rem; 
+      color: var(--colore-testo-principale); 
+      border-bottom: 2px solid var(--colore-bordo); 
+      padding-bottom: 10px; 
+      margin-top: 0; 
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    
+    /* Paragrafi con il tuo grigio azzurrato */
+    p { 
+      font-size: 1.05rem; 
+      color: var(--colore-testo-secondario); 
+      line-height: 1.6; 
+      text-align: left;
+    }
 
-  /* UNICO BLOCCO PER IL CODICE (Prism): Niente più conflitti o sovrascritture */
-  pre, code, pre[class*="language-"], code[class*="language-"] {
-    background-color: var(--colore-scatola) !important;
-    border: 1px solid var(--colore-bordo) !important;
-    border-radius: 8px !important;              /* I tuoi bellissimi bordi arrotondati */
-    margin: 24px 0 !important; 
-    padding: 18px !important; 
-    font-size: 0.95rem !important; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important; /* Ombra per dare profondità sul blu */
-    overflow-x: auto !important;                /* Barra di scorrimento se il codice è lungo */
-    white-space: pre !important;                 /* Evita che il codice vada a capo da solo rompendo la sintassi */
-  }
+    /* UNICO BLOCCO PER IL CODICE (Prism): Niente più conflitti o sovrascritture */
+    pre, code, pre[class*="language-"], code[class*="language-"] {
+      background-color: var(--colore-scatola) !important;
+      border: 1px solid var(--colore-bordo) !important;
+      border-radius: 8px !important;              /* I tuoi bellissimi bordi arrotondati */
+      margin: 24px 0 !important; 
+      padding: 18px !important; 
+      font-size: 0.95rem !important; 
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important; /* Ombra per dare profondità sul blu */
+      overflow-x: auto !important;                /* Barra di scorrimento se il codice è lungo */
+      white-space: pre !important;                 /* Mantiene la formattazione originale senza andare a capo a caso */
+    }
 
-  /* Forza i commenti a essere grigio azzurrati e in corsivo */
-  pre[class*="language-"] .token.comment,
-  code[class*="language-"] .token.comment,
-  .token.comment {
-    color: var(--colore-testo-secondario) !important;
-    font-style: italic !important;
-  }
-</style>
+    /* Forza i commenti a essere grigio azzurrati e in corsivo */
+    pre[class*="language-"] .token.comment,
+    code[class*="language-"] .token.comment,
+    .token.comment {
+      color: var(--colore-testo-secondario) !important;
+      font-style: italic !important;
+    }
+  </style>
 </head>
 <body>
 
@@ -99,7 +91,7 @@
     <h1>Script di Configurazione Firewall (Bash)</h1>
     <p>Di seguito trovi lo script di inizializzazione delle regole per <code>iptables</code>, con la gestione del NAT e l'apertura delle porte per SSH e WireGuard.</p>
 
-    <!-- 2. Il tuo script inserito nei tag corretti. La classe "language-bash" attiva la magia. -->
+    <!-- Il tuo script inserito nei tag corretti. La classe "language-bash" attiva la magia. -->
     <pre><code class="language-bash">#!/bin/bash
 # Azzera tutte le regole esistenti (INPUT, FORWARD, OUTPUT)
 iptables -F
@@ -125,7 +117,7 @@ iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT</code><
 
   </div>
 
-  <!-- 3. Gli script in fondo alla pagina per elaborare la colorazione dei comandi Shell -->
+  <!-- Script in fondo alla pagina per elaborare la colorazione dei comandi Shell -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
 
