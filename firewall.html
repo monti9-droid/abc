@@ -17,42 +17,63 @@
 
   <!-- Qui inseriamo il blocco CSS pulito senza tag duplicati -->
   <style>
-    :root {
-      --colore-sfondo: #0b1e2c;           /* Blu notte molto scuro per tutta la pagina */
-      --colore-scatola: #16415d;          /* Il tuo blu notte per la finestra e i blocchi */
-      --colore-testo-principale: #f8fafc; /* Bianco latte per i testi */
-      --colore-testo-secondario: #94a3b8; /* Grigio azzurrato per descrizioni e commenti */
-      --colore-accento: #38bdf8;          /* Azzurro vivido per titoli e dettagli */
-      --colore-bordo: #334155;            /* Separatori discreti */
-    }
+  :root {
+    --colore-sfondo: #0b1e2c;           /* Blu notte molto scuro per tutta la pagina */
+    --colore-scatola: #16415d;          /* Il tuo blu notte per la finestra e i blocchi */
+    --colore-testo-principale: #f8fafc; /* Bianco latte per i testi */
+    --colore-testo-secondario: #94a3b8; /* Grigio azzurrato per descrizioni e commenti */
+    --colore-accento: #38bdf8;          /* Azzurro vivido per titoli e dettagli */
+    --colore-bordo: #334155;            /* Separatori discreti */
+  }
 
-    /* Applica lo sfondo scuro globale a tutta la pagina */
-    html, body {
-      background-color: #0b1e2c !important;
-      color: #f8fafc !important;
-      margin: 0;
-      padding: 0;
-    }
+  /* Sfondo globale della pagina */
+  html, body {
+    background-color: var(--colore-sfondo) !important;
+    color: var(--colore-testo-principale) !important;
+    margin: 0;
+    padding: 0;
+  }
 
-    /* Forza i blocchi di Prism e i contenitori a prendere il tuo blu notte */
-    .container, 
-    pre, 
-    code,
-    pre[class*="language-"], 
-    code[class*="language-"] {
-      background-color: #16415d !important;
-      border: 1px solid #334155 !important;
-    }
+  /* La tua struttura container (adesso pulita dentro lo style) */
+  .container { 
+    width: 100%; 
+    max-width: 100%; 
+    box-sizing: border-box; 
+  }
 
-    /* Forza i commenti a essere grigio azzurrati e in corsivo */
-    pre[class*="language-"] .token.comment,
-    code[class*="language-"] .token.comment,
-    .token.comment {
-      color: #94a3b8 !important;
-      font-style: italic !important;
-    }
+  /* I tuoi titoli (h1) e paragrafi (p) adattati ai nuovi colori chiari */
+  h1 { 
+    font-size: 1.0rem; 
+    color: var(--colore-testo-principale); 
+    border-bottom: 2px solid var(--colore-bordo); 
+    padding-bottom: 10px; 
+    margin-top: 0; 
+  }
+  
+  p { 
+    font-size: 1.0rem; 
+    color: var(--colore-testo-secondario); 
+  }
 
-  </style>
+  /* Forza i blocchi di Prism a prendere il tuo blu notte e i bordi arrotondati che volevi */
+  pre, code, pre[class*="language-"], code[class*="language-"] {
+    background-color: var(--colore-scatola) !important;
+    border: 1px solid var(--colore-bordo) !important;
+    border-radius: 8px; /* I tuoi bordi arrotondati */
+    margin: 20px 0; 
+    padding: 20px; 
+    font-size: 1rem; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Ombra leggermente più scura per il blu */
+  }
+
+  /* Forza i commenti a essere grigio azzurrati e in corsivo */
+  pre[class*="language-"] .token.comment,
+  code[class*="language-"] .token.comment,
+  .token.comment {
+    color: var(--colore-testo-secondario) !important;
+    font-style: italic !important;
+  }
+</style>
 </head>
 <body>
 
