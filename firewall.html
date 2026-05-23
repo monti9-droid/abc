@@ -1,4 +1,5 @@
-<!-- Forzatura Aggiornamento Cache V2 -->
+HTML
+<!-- Forzatura Pagina Nuova V3 -->
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -6,6 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Configurazione Firewall IPTables</title>
   
+  <!-- Fogli di stile -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
 
   <style>
@@ -53,7 +55,11 @@
       line-height: 1.6; 
     }
 
+    /* LA CORAZZA: Forziamo il contenitore a prescindere da quello che fa Prism */
     pre, code, pre[class*="language-"], code[class*="language-"] {
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
       background-color: var(--colore-scatola) !important;
       border: 1px solid var(--colore-bordo) !important;
       border-radius: 8px !important;
@@ -103,6 +109,7 @@ iptables -t nat -A POSTROUTING -o enp0s3 -j MASQUERADE
 iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT</code></pre>
   </div>
 
+  <!-- Script JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
 
