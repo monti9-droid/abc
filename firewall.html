@@ -35,11 +35,13 @@
   }
 
   /* La tua struttura container (adesso pulita dentro lo style) */
-  .container { 
-    width: 90%; 
-    max-width: 100%; 
-    box-sizing: border-box; 
-  }
+.container { 
+  width: 90%;               /* Usa il 90% della larghezza dello schermo */
+  max-width: 1200px;        /* Evita che sui monitor giganti diventi troppo largo */
+  margin: 40px auto;        /* Il trucco magico: "auto" centra la scatola perfettamente al mezzo */
+  padding: 20px;            /* Crea uno spazio di sicurezza interno per i testi */
+  box-sizing: border-box; 
+}
 
   /* I tuoi titoli (h1) e paragrafi (p) adattati ai nuovi colori chiari */
   h1 { 
